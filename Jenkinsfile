@@ -1,0 +1,59 @@
+pipeline {
+
+  environment {
+    HOME = "${env.WORKSPACE}"
+    dockerimagename = "vaibhavx7/Android_Emulator"
+    dockerimagenametwo = "vaibhavx7/Katalon"
+    dockerImage = ""
+    dockerImageTwo = ""
+  }
+
+  agent any
+
+  stages {
+
+    stage('SCM Checkout') {
+      steps{
+        script {
+          git credentialsId: 'Github_cred', poll: false, url: 'https://github.com/Osiris199/Katalon_Emulator_k8s.git'
+        }
+      }
+    }
+
+    stage('Build image') {
+      steps{
+        script {
+          dockerImage = docker.build("dockerimagename", "-f ${env.WORKSPACE}/Dockerfile_Android .")
+          dockerImageTwo = docker.build("dockerimagenametwo", "-f ${env.WORKSPACE}/Dockerfile_Katalon .")
+        }
+      }
+    }
+
+    stage('Pushing Images') {
+      environment {
+            registryCredential = 'Docker_Hub_cred'
+      }
+      steps{
+        script {
+            docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+            dockerImage.push("latest")
+          }
+        }
+      }
+    }
+
+    stage('Deploying katalon and android emulator container to Kubernetes') {
+      steps {
+        script {
+	        withCredentials([file(credentialsId: 'Kubeconfig_file', variable: 'KUBECONFIG')]) {
+    	          sh '''minikube kubectl -- apply -f deployment.yaml'''
+		            sh '''minikube kubectl -- apply -f android-service.yaml'''
+                sh '''minikube kubectl -- apply -f katalon-service.yaml'''
+          }
+        }
+      }
+    }
+
+  }
+
+}

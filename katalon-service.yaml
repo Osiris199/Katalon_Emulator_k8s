@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: katalon-service #The name of the Kubernetes Service to be created in the Kubernetes cluster
+spec:
+  selector:
+    app:  
+  type: LoadBalancer #Type of the Kubernetes Service
+  ports:
+  - protocol: TCP
+    name: "4726"
+    port: 4726 #Service port
+    targetPort: 4726 #The port for the React.js application container
