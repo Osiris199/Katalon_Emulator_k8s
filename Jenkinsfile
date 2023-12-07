@@ -2,7 +2,7 @@ pipeline {
 
   environment {
     HOME = "${env.WORKSPACE}"
-    dockerimagename = "vaibhavx7/android_emulator"
+    dockerimagename = "vaibhavx7/android-emulator"
     //dockerimagenametwo = "vaibhavx7/katalon"
     dockerImage = ""
     //dockerImageTwo = ""
