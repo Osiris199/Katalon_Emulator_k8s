@@ -60,10 +60,6 @@ ENV APPIUM_PORT=4723
 
 COPY . .
 
-RUN pwd
-
-RUN ls
-
 RUN chmod a+x start_vnc.sh && \
     chmod a+x start_emu.sh && \
     chmod a+x start_appium.sh && \
