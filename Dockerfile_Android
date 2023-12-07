@@ -58,7 +58,7 @@ ENV APPIUM=./start_appium.sh
 
 ENV APPIUM_PORT=4723
 
-COPY . /
+COPY . .
 
 RUN pwd
 
