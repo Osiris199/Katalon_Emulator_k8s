@@ -33,7 +33,7 @@ spec:
           stdin: true
           tty: true
 
-        - name: katalon #The name of the katalon container
-          image: vaibhavx7/katalon:latest #The Docker image for building the katalon container
-          ports:
-          - containerPort: 3000 #The port for the katalon container
+#        - name: katalon #The name of the katalon container
+#          image: vaibhavx7/katalon:latest #The Docker image for building the katalon container
+#          ports:
+#          - containerPort: 3000 #The port for the katalon container
