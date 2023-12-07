@@ -23,8 +23,8 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          dockerImage = docker.build("dockerimagename", "-f ${env.WORKSPACE}/Dockerfile_Android .")
-          dockerImageTwo = docker.build("dockerimagenametwo", "-f ${env.WORKSPACE}/Dockerfile_Katalon .")
+          dockerImage = docker.build(dockerimagename, "-f ${env.WORKSPACE}/Dockerfile_Android .")
+          dockerImageTwo = docker.build(dockerimagenametwo, "-f ${env.WORKSPACE}/Dockerfile_Katalon .")
         }
       }
     }
