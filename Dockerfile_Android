@@ -60,9 +60,9 @@ ENV APPIUM_PORT=4723
 
 COPY . /
 
-RUN chmod a+x start_vnc.sh && \
-    chmod a+x start_emu.sh && \
-    chmod a+x start_appium.sh && \
-    chmod a+x start_emu_headless.sh
+RUN ["chmod", "a+x", "start_vnc.sh"] \
+    ["chmod", "a+x", "start_emu.sh"] \
+    ["chmod", "a+x", "start_appium.sh"] \
+    ["chmod", "a+x", "start_emu_headless.sh"]
 
 CMD [ "/bin/bash" ]
