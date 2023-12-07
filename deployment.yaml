@@ -16,7 +16,6 @@ spec:
     spec:
       containers:
         - name: android-emulator #The name of the android emulator container
-          workingDir: /Android
           image: vaibhavx7/android-emulator:latest #The Docker image for building the android emulator container
           ports:
           - containerPort: 4725 #The port for android emulator container
