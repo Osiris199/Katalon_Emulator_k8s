@@ -1,4 +1,2 @@
 FROM katalonstudio/katalon
 
-RUN apt get update
-
