@@ -19,6 +19,11 @@ spec:
           image: vaibhavx7/android-emulator:latest #The Docker image for building the android emulator container
           ports:
           - containerPort: 4725 #The port for android emulator container
+          resources:
+            requests:
+              memory: "4096MiB"
+            limits:
+              memory: "6144MiB"
           args:
             - bash
             - -c
