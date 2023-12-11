@@ -59,8 +59,8 @@ ENV APPIUM=./start_appium.sh
 ENV APPIUM_PORT=4723
 
 RUN wget https://download.katalon.com/9.1.0/Katalon_Studio_Engine_Windows_64-9.1.0.zip \
-    unzip -d /
-    rm Katalon_Studio_Engine_Windows_64-9.1.0.zip /
+    unzip -d \
+    rm -rf Katalon_Studio_Engine_Windows_64-9.1.0.zip 
 
 COPY . /
 
