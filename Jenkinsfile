@@ -48,7 +48,7 @@ pipeline {
 	        withCredentials([file(credentialsId: 'Kubeconfig_file', variable: 'KUBECONFIG')]) {
     	          sh '''minikube kubectl -- apply -f deployment.yaml'''
 		  sh '''minikube kubectl -- apply -f android-service.yaml'''
-                  sh '''minikube kubectl -- apply -f volume.yaml'''
+                  //sh '''minikube kubectl -- apply -f volume.yaml'''
           }
         }
       }
