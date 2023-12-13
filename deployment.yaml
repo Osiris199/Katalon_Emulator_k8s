@@ -14,16 +14,16 @@ spec:
       labels:
         app: android-emulator
     spec:
-      volumes:
-        - name: report-volume
-          persistentVolumeClaim:
-            claimName: report-volume
+      #volumes:
+      #  - name: report-volume
+      #    persistentVolumeClaim:
+      #      claimName: report-volume
       containers:
         - name: android-emulator #The name of the android emulator container
           image: vaibhavx7/android-emulator:latest #The Docker image for building the android emulator container
-          volumeMounts:
-            - mountPath: /katalon_sample_prj/Reports
-              name: report-volume
+      #    volumeMounts:
+      #      - mountPath: /katalon_sample_prj/Reports
+      #        name: report-volume
           ports:
           - containerPort: 4725 #The port for android emulator container
           args:
