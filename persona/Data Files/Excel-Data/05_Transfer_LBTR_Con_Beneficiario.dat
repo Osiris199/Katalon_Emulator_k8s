@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFileEntity>
+   <description></description>
+   <name>05_Transfer_LBTR_Con_Beneficiario</name>
+   <tag></tag>
+   <containsHeaders>true</containsHeaders>
+   <csvSeperator></csvSeperator>
+   <dataFileGUID>fee7724f-daac-450d-aba1-c4b67a2b93ed</dataFileGUID>
+   <dataSourceUrl>Data Files/Excel-Data/05_Transfer_LBTR_Con_Benficiario.xlsx</dataSourceUrl>
+   <driver>ExcelFile</driver>
+   <isInternalPath>true</isInternalPath>
+   <query></query>
+   <secureUserAccount>false</secureUserAccount>
+   <sheetName>Transfer_LBTR_Con_Benficiario</sheetName>
+   <usingGlobalDBSetting>false</usingGlobalDBSetting>
+</DataFileEntity>

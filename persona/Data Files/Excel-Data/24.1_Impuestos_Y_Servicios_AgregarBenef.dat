@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFileEntity>
+   <description></description>
+   <name>24.1_Impuestos_Y_Servicios_AgregarBenef</name>
+   <tag></tag>
+   <connectionProperties/>
+   <containsHeaders>true</containsHeaders>
+   <csvSeperator></csvSeperator>
+   <dataFileGUID>10f3964c-d96d-4ac4-9d85-f92b0ff30852</dataFileGUID>
+   <dataSourceUrl>Data Files/Excel-Data/24.1_Impuestos_Y_Servicios_AgregarBenef.xlsx</dataSourceUrl>
+   <driver>ExcelFile</driver>
+   <isInternalPath>true</isInternalPath>
+   <query></query>
+   <secureUserAccount>false</secureUserAccount>
+   <sheetName>Benef_Productos_Y_Servicios</sheetName>
+   <usingGlobalDBSetting>false</usingGlobalDBSetting>
+</DataFileEntity>

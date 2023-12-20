@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFileEntity>
+   <description></description>
+   <name>14_Pago_Prestamos_Interbanc_Pago_Unico_ACH</name>
+   <tag></tag>
+   <containsHeaders>true</containsHeaders>
+   <csvSeperator></csvSeperator>
+   <dataFileGUID>e2432066-ce00-42b0-8c1a-9d2da18fa8c4</dataFileGUID>
+   <dataSourceUrl>Data Files/Excel-Data/14_Pago_Prestamos_Interbanc_Pago_Unico_ACH.xlsx</dataSourceUrl>
+   <driver>ExcelFile</driver>
+   <isInternalPath>true</isInternalPath>
+   <query></query>
+   <secureUserAccount>false</secureUserAccount>
+   <sheetName>prestamoPagoUnico</sheetName>
+   <usingGlobalDBSetting>false</usingGlobalDBSetting>
+</DataFileEntity>

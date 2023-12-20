@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFileEntity>
+   <description></description>
+   <name>15_Pago_Prestamos_Interbanc_Pago_Unico_LBTR</name>
+   <tag></tag>
+   <containsHeaders>true</containsHeaders>
+   <csvSeperator></csvSeperator>
+   <dataFileGUID>9e6c8f8b-d404-410d-9ea9-7b3b2c720aa2</dataFileGUID>
+   <dataSourceUrl>Data Files/Excel-Data/15_Pago_Prestamos_Interbanc_Pago_Unico_LBTR.xlsx</dataSourceUrl>
+   <driver>ExcelFile</driver>
+   <isInternalPath>true</isInternalPath>
+   <query></query>
+   <secureUserAccount>false</secureUserAccount>
+   <sheetName>prestamoPagoUnico</sheetName>
+   <usingGlobalDBSetting>false</usingGlobalDBSetting>
+</DataFileEntity>
