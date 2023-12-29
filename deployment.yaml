@@ -42,7 +42,7 @@ spec:
           tty: true
           
           # VNC Container
-        - name: VNC #The name of the VNC container
+        - name: vnc #The name of the VNC container
           image: vaibhavx7/android-emulator:latest #The Docker image for building the VNC container
           ports:
           - containerPort: 5900 #The port for the VNC container
