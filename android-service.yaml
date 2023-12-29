@@ -10,4 +10,4 @@ spec:
   - protocol: TCP
     name: "4725"
     port: 4725 #Service port
-    targetPort: 4725 #The port for the React.js application container
+    targetPort: 4725 #The port for the katalon android application container

@@ -3,9 +3,7 @@ pipeline {
   environment {
     HOME = "${env.WORKSPACE}"
     dockerimagename = "vaibhavx7/android-emulator"
-    //dockerimagenametwo = "vaibhavx7/katalon"
     dockerImage = ""
-    //dockerImageTwo = ""
   }
 
   agent any
@@ -46,7 +44,8 @@ pipeline {
         script {
 	        withCredentials([file(credentialsId: 'Kubeconfig_file', variable: 'KUBECONFIG')]) {
     	          sh '''minikube kubectl -- apply -f deployment.yaml'''
-		  sh '''minikube kubectl -- apply -f android-service.yaml'''
+		            sh '''minikube kubectl -- apply -f android-service.yaml'''
+                sh '''minikube kubectl -- apply -f vnc-service.yaml'''
           }
         }
       }
