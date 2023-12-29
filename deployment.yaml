@@ -31,7 +31,7 @@ spec:
             - bash
             - -c
             - |
-              ./start_emu_headless.sh
+              ./start_emu_headed.sh
               tail -f /dev/null
           env:
             - name: APPIUM_PORT
