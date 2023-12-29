@@ -31,7 +31,6 @@ spec:
             - bash
             - -c
             - |
-              ./start_vnc.sh
               ./start_emu_headed.sh
               tail -f /dev/null
           env:
