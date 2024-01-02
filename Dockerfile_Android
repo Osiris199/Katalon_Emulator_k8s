@@ -65,7 +65,6 @@ RUN wget https://download.katalon.com/9.1.0/Katalon_Studio_Engine_Linux_64-9.1.0
 COPY . /
 
 RUN chmod a+x start_vnc.sh && \
-    chmod a+x start_emu.sh && \
     chmod a+x start_appium.sh && \
     chmod a+x start_emu_headed.sh && \
     chmod a+x start_emu_headless.sh
