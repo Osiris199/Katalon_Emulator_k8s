@@ -53,4 +53,20 @@ pipeline {
 
   }
 
+  post { 
+        always {
+            def pod = sh 'kubectl get pods --no-headers -o custom-columns=":metadata.name"'
+            def status
+            
+            while(status != 'Running') {
+              echo "Sleeping for 5 seconds..."
+              sleep(5)
+              status = sh "kubectl get pods ${pod} deployment-6fdffbbc98-f9gxg --no-headers -o custom-columns=':status.phase'"
+            }
+
+            sh "kubectl port-forward ${pod} 5900:5900"
+
+        }
+    }
+
 }
