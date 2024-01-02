@@ -54,7 +54,7 @@ pipeline {
     stage('VNC Port Forwarding') {
         steps {
 	  script {	
-	        def pod = sh 'minikube kubectl -- get pods --no-headers -o custom-columns=":metadata.name"'
+	        def pod = sh "minikube kubectl -- get pods --no-headers -o custom-columns=':metadata.name'"
 		echo "pod name ${pod}"
 	        def status
 	            
