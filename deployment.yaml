@@ -31,7 +31,8 @@ spec:
             - bash
             - -c
             - |
-              ./start_emu_headed.sh
+              ./start_vnc.sh \
+              ./start_emu_headed.sh \
               tail -f /dev/null
           env:
             - name: APPIUM_PORT
