@@ -53,19 +53,20 @@ pipeline {
 
     stage('VNC Port Forwarding') {
         steps {
-	  script {	
-	        def pod = sh "minikube kubectl -- get pods --no-headers -o custom-columns=':metadata.name'"
-		echo "pod name ${pod}"
-	        def status
+	  script {
+		   sleep(100)
+	           def pod = sh "minikube kubectl -- get pods --no-headers -o custom-columns=':metadata.name'"
+		   echo "pod name ${pod}"
+	           def status
 	            
-	        while(status != 'Running') {
-	          echo "Sleeping for 5 seconds..."
-	          sleep(5)
-	          status = sh "minikube kubectl -- get pods ${pod} --no-headers -o custom-columns=':status.phase'"
-		  echo "status ${status}"
-		}
+	          while(status != 'Running') {
+	            echo "Sleeping for 5 seconds..."
+	            sleep(5)
+	            status = sh "minikube kubectl -- get pods ${pod} --no-headers -o custom-columns=':status.phase'"
+		    echo "status ${status}"
+		  }
 	
-	        sh "minikube kubectl -- port-forward ${pod} 5900:5900"
+	          sh "minikube kubectl -- port-forward ${pod} 5900:5900"
 	  }
         }
     }
