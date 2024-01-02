@@ -51,9 +51,7 @@ pipeline {
       }
     }
 
-  }
-
-  stage('VNC Port Forwarding') {
+    stage('VNC Port Forwarding') {
         steps {
 	  script {	
 	        def pod = sh 'kubectl get pods --no-headers -o custom-columns=":metadata.name"'
@@ -71,5 +69,7 @@ pipeline {
 	  }
         }
     }
+
+  }
 
 }
