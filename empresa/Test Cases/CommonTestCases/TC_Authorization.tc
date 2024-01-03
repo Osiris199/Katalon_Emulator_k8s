@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_Authorization</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>3b17f4aa-a29b-441f-af91-d4bde617dc15</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>06230abf-3083-43ce-a6cc-17ad15570c84</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>7bbc1a1a-8ef5-4253-b6b0-e562aadaf9f2</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>06230abf-3083-43ce-a6cc-17ad15570c84</id>
+      <masked>false</masked>
+      <name>Password</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>7bbc1a1a-8ef5-4253-b6b0-e562aadaf9f2</id>
+      <masked>false</masked>
+      <name>Verification</name>
+   </variable>
+</TestCaseEntity>

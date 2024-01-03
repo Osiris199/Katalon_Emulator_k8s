@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_SelectAuthorization</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>a5f4ea34-332a-4021-980a-3459426ba34b</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>d1a0a0d1-85d6-4c50-9169-d318f9ff0397</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>5017f186-48aa-46ea-8b88-b38bc0506242</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>d1a0a0d1-85d6-4c50-9169-d318f9ff0397</id>
+      <masked>false</masked>
+      <name>Type</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>5017f186-48aa-46ea-8b88-b38bc0506242</id>
+      <masked>false</masked>
+      <name>Verification</name>
+   </variable>
+</TestCaseEntity>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_ValidateOrigenBalance</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>591bb6b6-f527-4c92-857b-2c17311f1ee5</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>a79dc778-e8d2-460b-9a23-6d4a0f342aac</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>a79dc778-e8d2-460b-9a23-6d4a0f342aac</id>
+      <masked>false</masked>
+      <name>Monto</name>
+   </variable>
+</TestCaseEntity>
