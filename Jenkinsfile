@@ -42,6 +42,7 @@ pipeline {
     stage('Deploying katalon and android emulator container to Kubernetes') {
       steps {
         script {
+		sh "pwd"
 	        withCredentials([file(credentialsId: 'Kubeconfig_file', variable: 'KUBECONFIG')]) {
     	        sh '''minikube kubectl -- apply -f deployment.yaml'''
 		sh '''minikube kubectl -- apply -f android-service.yaml'''
