@@ -39,8 +39,8 @@ ENV EMULATOR_NAME=$EMULATOR_NAME
 ENV DEVICE_NAME=$EMULATOR_DEVICE
 RUN echo "no" | avdmanager --verbose create avd --force --name "${EMULATOR_NAME}" --device "${EMULATOR_DEVICE}" --package "${EMULATOR_PACKAGE}"
 
-RUN apt install nodejs -y && \
-    apt install npm -y && \
+RUN apt install nodejs@20.9.0 -y && \
+    apt install npm@10.2.3 -y && \
     npm i -g appium@1.22.0 --unsafe-perm=true --allow-root && \
     appium driver install uiautomator2 && \
     exit 0 && \
