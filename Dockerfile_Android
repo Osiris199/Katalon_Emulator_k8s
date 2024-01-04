@@ -43,7 +43,7 @@ RUN curl -sL https://deb.nodesource.com/setup_18.x | bash && \
     apt-get -qqy install nodejs && \
     npm install -g npm && \
     npm i -g appium@1.22.0 --unsafe-perm=true --allow-root && \
-    appium driver install uiautomator2 && \
+    npm i appium-uiautomator2-driver && \
     exit 0 && \
     npm cache clean && \
     apt-get remove --purge -y npm && \  
