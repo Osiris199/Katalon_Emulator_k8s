@@ -1,4 +1,4 @@
-FROM eclipse-temurin
+FROM eclipse-temurin:11.0.12_7-jdk
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -42,7 +42,7 @@ RUN echo "no" | avdmanager --verbose create avd --force --name "${EMULATOR_NAME}
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash && \
     apt-get -qqy install nodejs && \
     npm install -g npm && \
-    npm i -g appium@next --unsafe-perm=true --allow-root && \
+    npm i -g appium@1.22.0 --unsafe-perm=true --allow-root && \
     appium driver install uiautomator2 && \
     exit 0 && \
     npm cache clean && \
@@ -51,16 +51,16 @@ RUN curl -sL https://deb.nodesource.com/setup_18.x | bash && \
     apt-get clean && \
     rm -Rf /tmp/* && rm -Rf /var/lib/apt/lists/*
 
-ENV EMU=./start_emu.sh
+ENV EMU=./start_emu_headed.sh
 ENV EMU_HEADLESS=./start_emu_headless.sh
 ENV VNC=./start_vnc.sh
 ENV APPIUM=./start_appium.sh
 
 ENV APPIUM_PORT=4723
 
-RUN wget https://download.katalon.com/9.1.0/Katalon_Studio_Engine_Linux_64-9.1.0.tar.gz && \
-    tar -xvzf Katalon_Studio_Engine_Linux_64-9.1.0.tar.gz && \
-    rm -rf Katalon_Studio_Engine_Linux_64-9.1.0.tar.gz
+RUN wget https://download.katalon.com/8.6.8/Katalon_Studio_Engine_Linux_64-8.6.8.tar.gz && \
+    tar -xvzf Katalon_Studio_Engine_Linux_64-8.6.8.tar.gz && \
+    rm -rf Katalon_Studio_Engine_Linux_64-8.6.8.tar.gz
 
 COPY . /
 
