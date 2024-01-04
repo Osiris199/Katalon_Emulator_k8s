@@ -39,7 +39,7 @@ ENV EMULATOR_NAME=$EMULATOR_NAME
 ENV DEVICE_NAME=$EMULATOR_DEVICE
 RUN echo "no" | avdmanager --verbose create avd --force --name "${EMULATOR_NAME}" --device "${EMULATOR_DEVICE}" --package "${EMULATOR_PACKAGE}"
 
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash && \
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash && \
     apt-get -qqy install nodejs && \
     npm install -g npm && \
     echo "appium installation from here" && \
