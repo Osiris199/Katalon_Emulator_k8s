@@ -39,9 +39,9 @@ ENV EMULATOR_NAME=$EMULATOR_NAME
 ENV DEVICE_NAME=$EMULATOR_DEVICE
 RUN echo "no" | avdmanager --verbose create avd --force --name "${EMULATOR_NAME}" --device "${EMULATOR_DEVICE}" --package "${EMULATOR_PACKAGE}"
 
-RUN sudo apt update && \
-    sudo apt-get install nodejs=14.21.3-1chl1~precise1 && \
-    sudo apt-get install npm=6.14.18-1chl1~precise1 && \
+RUN curl -fsSL https://deb.nodesource.com/setup_21.x | bash && \
+    sudo apt-get install -y nodejs && \
+    npm install -g npm && \
     echo "appium installation from here" && \
     npm i -g appium@1.22.0 --unsafe-perm=true --allow-root && \
     appium driver install uiautomator2 && \
