@@ -22,7 +22,7 @@ ARG ANDROID_CMD="commandlinetools-linux-8092744_latest.zip"
 ARG ANDROID_SDK_PACKAGES="${EMULATOR_PACKAGE} ${PLATFORM_VERSION} ${BUILD_TOOL} platform-tools"
 
 ENV ANDROID_SDK_ROOT=/opt/android
-ENV KATALON_JAVA_HOME=/opt/java/openjdk
+ENV KATALON_JAVA_HOME=/opt/java/openjdk/jre
 ENV PATH "$PATH:$ANDROID_SDK_ROOT/cmdline-tools/tools:$ANDROID_SDK_ROOT/cmdline-tools/tools/bin:$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/tools/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/build-tools/${BUILD_TOOLS}"
 ENV DOCKER="true"
 
