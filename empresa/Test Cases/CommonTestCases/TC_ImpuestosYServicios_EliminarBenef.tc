@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<TestCaseEntity>
-   <description></description>
-   <name>TC_ImpuestosYServicios_EliminarBenef</name>
-   <tag></tag>
-   <comment></comment>
-   <testCaseGuid>0dd5d253-52c4-4daf-84d5-5572e189e5ef</testCaseGuid>
-</TestCaseEntity>
