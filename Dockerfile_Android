@@ -56,9 +56,9 @@ ENV APPIUM=./start_appium.sh
 
 ENV APPIUM_PORT=4723
 
-RUN wget https://download.katalon.com/9.2.0/Katalon_Studio_Engine_Linux_64-9.2.0.tar.gz && \
-    tar -xvzf Katalon_Studio_Engine_Linux_64-9.2.0.tar.gz && \
-    rm -rf Katalon_Studio_Engine_Linux_64-9.2.0.tar.gz
+RUN wget https://download.katalon.com/8.6.8/Katalon_Studio_Engine_Linux_64-8.6.8.tar.gz && \
+    tar -xvzf Katalon_Studio_Engine_Linux_64-8.6.8.tar.gz && \
+    rm -rf Katalon_Studio_Engine_Linux_64-8.6.8.tar.gz
 
 COPY . /
 
