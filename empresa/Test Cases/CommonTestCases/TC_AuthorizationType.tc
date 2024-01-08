@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_AuthorizationType</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>ea2ae2a3-1f49-4227-b033-08f4d5d7f16b</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>d497a75d-4ef7-4c18-be1a-ce6a59716929</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>d497a75d-4ef7-4c18-be1a-ce6a59716929</id>
+      <masked>false</masked>
+      <name>Verification</name>
+   </variable>
+</TestCaseEntity>

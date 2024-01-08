@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_DeletePreviousMails</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>769fccb3-6467-48f1-9dcf-050c5d696f52</testCaseGuid>
+</TestCaseEntity>

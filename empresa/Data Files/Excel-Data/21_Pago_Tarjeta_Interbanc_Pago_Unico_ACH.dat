@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFileEntity>
+   <description></description>
+   <name>21_Pago_Tarjeta_Interbanc_Pago_Unico_ACH</name>
+   <tag></tag>
+   <containsHeaders>true</containsHeaders>
+   <csvSeperator></csvSeperator>
+   <dataFileGUID>b63bce84-562a-49b5-8c0d-2e29b726651f</dataFileGUID>
+   <dataSourceUrl>Data Files/Excel-Data/21_Pago_Tarjeta_Interbanc_Pago_Unico_ACH.xlsx</dataSourceUrl>
+   <driver>ExcelFile</driver>
+   <isInternalPath>true</isInternalPath>
+   <query></query>
+   <secureUserAccount>false</secureUserAccount>
+   <sheetName>TarjetaPagoUnico_ACH</sheetName>
+   <usingGlobalDBSetting>false</usingGlobalDBSetting>
+</DataFileEntity>
