@@ -65,7 +65,7 @@ function check_emulator_status () {
       printf "\e[K${G}==> \u2713 Emulator is ready : '$result'           ${NC}\n"
       adb devices -l
       adb shell input keyevent 82
-      cd Katalon_Studio_Engine_Linux_64-9.2.0
+      cd Katalon_Studio_Engine_Linux_64-8.6.8
       ./katalonc -noSplash -runMode=console -projectPath="/empresa/BanReservas-Android-New.prj" -retry=0 -testSuitePath="Test Suites/PAYMENTS/TS12_Pago_Prestamos_Interbanc_Benef_Pago_ACH" -browserType="Android" -deviceId="emulator-5554" -executionProfile="local" -apiKey="2b233a8b-743d-44bd-8e85-dc990101c95e"
       #./katalonc -noSplash -runMode=console -projectPath="/persona/BanReservas-Android-New.prj" -retry=0 -testSuitePath="Test Suites/PAYMENTS/TS12_Pago_Prestamos_Interbanc_Benef_Pago_ACH" -browserType="Android" -deviceId="emulator-5554" -executionProfile="local" -apiKey="2b233a8b-743d-44bd-8e85-dc990101c95e"
       #./katalonc -noSplash -runMode=console -projectPath="/katalon_sample_prj/Android Mobile Tests with Katalon Studio.prj" -retry=0 -testSuitePath="Test Suites/Smoke Tests for API Demos App" -browserType="Android" -deviceId="emulator-5554" -executionProfile="default" -apiKey="2b233a8b-743d-44bd-8e85-dc990101c95e"
