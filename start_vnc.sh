@@ -1,80 +1,79 @@
 #!/bin/bash
 
-readonly G_LOG_I='[INFO]'
-readonly G_LOG_W='[WARN]'
-readonly G_LOG_E='[ERROR]'
-BL='\033[0;34m'
-G='\033[0;32m'
-NC='\033[0m' # No Color
-
-main() {
-    launch_xvfb
-    launch_window_manager
-    run_vnc_server
-    printf "${G}==> ${BL}Welcome to android-emulator VNC${G}<==${NC}""\n"
+main_function() {
+    xvfb
+    window_manager_fluxbox
+    vnc_server
+    printf "Welcome to android-emulator VNC""\n"
 }
 
-launch_xvfb() {
-    # Set defaults if the user did not specify envs.
+xvfb(){
     export DISPLAY=${XVFB_DISPLAY:-:1}
     local screen=${XVFB_SCREEN:-0}
     local resolution=${XVFB_RESOLUTION:-1280x1024x24}
-    local timeout=${XVFB_TIMEOUT:-5}
-
-    # Start and wait for either Xvfb to be fully up or we hit the timeout.
+    local timeout=${XVFB_TIMEOUT:-20}
+    
     Xvfb ${DISPLAY} -screen ${screen} ${resolution} &
-    local loopCount=0
-    until xdpyinfo -display ${DISPLAY} > /dev/null 2>&1
-    do
-        loopCount=$((loopCount+1))
+    local xvfb_pid=$!
+    
+    local loop_count=0
+    until xdpyinfo -display ${DISPLAY} > /dev/null 2>&1; do
+        ((loop_count++))
         sleep 1
-        if [ ${loopCount} -gt ${timeout} ]
-        then
-            echo "${G_LOG_E} xvfb failed to start."
+        if [ $loop_count -gt $timeout ]; then
+            echo "Xvfb failed to start within timeout period."
+            if ps -p $xvfb_pid > /dev/null; then
+                kill $xvfb_pid
+                wait $xvfb_pid
+            fi
             exit 1
         fi
     done
+    echo "Xvfb started successfully."
 }
 
-launch_window_manager() {
-    local timeout=${XVFB_TIMEOUT:-5}
+window_manager_fluxbox() {
+    TIMEOUT=10
 
-    # Start and wait for either fluxbox to be fully up or we hit the timeout.
     fluxbox &
-    local loopCount=0
-    until wmctrl -m > /dev/null 2>&1
-    do
-        loopCount=$((loopCount+1))
+
+    FLUXBOX_PID=$!
+
+    sleep_count=0
+    while ! wmctrl -m > /dev/null 2>&1; do
         sleep 1
-        if [ ${loopCount} -gt ${timeout} ]
-        then
-            echo "${G_LOG_E} fluxbox failed to start."
+        sleep_count=$((sleep_count + 1))
+        if [ $sleep_count -ge $TIMEOUT ]; then
+            echo "Fluxbox failed to start within timeout period."
+            if ps -p $FLUXBOX_PID > /dev/null; then
+                kill $FLUXBOX_PID
+                wait $FLUXBOX_PID
+            fi
             exit 1
         fi
     done
+    echo "Fluxbox started successfully."
 }
 
-run_vnc_server() {
-    local passwordArgument='-nopw'
+vnc_server(){
+ local passwordArgument=''
 
-    if [ -n "${VNC_PASSWORD}" ]
-    then
+    if [ -n "${VNC_PASSWORD}" ]; then
         local passwordFilePath="${HOME}/x11vnc.pass"
-        if ! x11vnc -storepasswd "${VNC_PASSWORD}" "${passwordFilePath}"
-        then
+        if ! x11vnc -storepasswd "${VNC_PASSWORD}" "${passwordFilePath}"; then
             echo "${G_LOG_E} Failed to store x11vnc password."
             exit 1
         fi
-        passwordArgument=-"-rfbauth ${passwordFilePath}"
+        passwordArgument="-rfbauth ${passwordFilePath}"
         echo "${G_LOG_I} The VNC server will ask for a password."
     else
         echo "${G_LOG_W} The VNC server will NOT ask for a password."
+        passwordArgument='-nopw'
     fi
 
-    x11vnc -ncache_cr -display ${DISPLAY} -forever ${passwordArgument} &
+    x11vnc -ncache_cr -display "${DISPLAY}" -forever ${passwordArgument} &
     wait $!
 }
-
 
 control_c() {
     echo ""
@@ -83,6 +82,6 @@ control_c() {
 
 trap control_c SIGINT SIGTERM SIGHUP
 
-main
+main_function
 
 exit

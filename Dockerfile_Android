@@ -6,13 +6,13 @@ WORKDIR /
 
 SHELL ["/bin/bash", "-c"]   
 
-RUN apt update && apt install -y curl sudo wget unzip bzip2 libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev libnss3 libxcursor1 libpulse-dev libxshmfence-dev xauth xvfb x11vnc fluxbox wmctrl libdbus-glib-1-2
+RUN apt update && apt install -y curl sudo wget unzip libdrm-dev libxkbcommon-dev libgbm-dev libasound-dev libnss3 libxcursor1 libpulse-dev libxshmfence-dev xauth xvfb x11vnc fluxbox wmctrl libdbus-glib-1-2 bzip2
 
 ARG ARCH="x86_64" 
 ARG TARGET="google_apis_playstore"  
 ARG API_LEVEL="32" 
 ARG BUILD_TOOLS="33.0.2"
-ARG ANDROID_ARCH=${ANDROID_ARCH_DEFAULT}
+ARG KATALON_VERSION="8.6.8"
 ARG ANDROID_API_LEVEL="android-${API_LEVEL}"
 ARG ANDROID_APIS="${TARGET};${ARCH}"
 ARG EMULATOR_PACKAGE="system-images;${ANDROID_API_LEVEL};${ANDROID_APIS}"
@@ -20,29 +20,39 @@ ARG PLATFORM_VERSION="platforms;${ANDROID_API_LEVEL}"
 ARG BUILD_TOOL="build-tools;${BUILD_TOOLS}"
 ARG ANDROID_CMD="commandlinetools-linux-8092744_latest.zip"
 ARG ANDROID_SDK_PACKAGES="${EMULATOR_PACKAGE} ${PLATFORM_VERSION} ${BUILD_TOOL} platform-tools"
+ARG EMULATOR_NAME="nexus"
+ARG EMULATOR_DEVICE="Nexus 6"
+ARG KATALON_REPORT_PATH="/empresa/Reports/."
+ARG KATALON_LOCAL_REPORT_PATH="/home/siddhatech/Reports"
+ARG TEST_SUITE
 
 ENV ANDROID_SDK_ROOT=/opt/android
 ENV KATALON_JAVA_HOME=/opt/java/openjdk/jre
+ENV KATALON_REPORT_PATH=$KATALON_REPORT_PATH
+ENV KATALON_LOCAL_REPORT_PATH=$KATALON_LOCAL_REPORT_PATH
 ENV PATH "$PATH:$ANDROID_SDK_ROOT/cmdline-tools/tools:$ANDROID_SDK_ROOT/cmdline-tools/tools/bin:$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/tools/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/build-tools/${BUILD_TOOLS}"
 ENV DOCKER="true"
-
-RUN wget https://dl.google.com/android/repository/${ANDROID_CMD} -P /tmp && \
-              unzip -d $ANDROID_SDK_ROOT /tmp/$ANDROID_CMD && \
-              mkdir -p $ANDROID_SDK_ROOT/cmdline-tools/tools && cd $ANDROID_SDK_ROOT/cmdline-tools &&  mv NOTICE.txt source.properties bin lib tools/  && \
-              cd $ANDROID_SDK_ROOT/cmdline-tools/tools && ls
-
-RUN yes Y | sdkmanager --licenses 
-RUN yes Y | sdkmanager --verbose --no_https ${ANDROID_SDK_PACKAGES} 
-
-ARG EMULATOR_NAME="nexus"
-ARG EMULATOR_DEVICE="Nexus 6"
+ENV DISPLAY=:1
 ENV EMULATOR_NAME=$EMULATOR_NAME
+ENV KATALON_VERSION=$KATALON_VERSION
 ENV DEVICE_NAME=$EMULATOR_DEVICE
+ENV TEST_SUITE_NAME=$TEST_SUITE
+
+RUN set -e \
+    && wget https://dl.google.com/android/repository/${ANDROID_CMD} -P /tmp \
+    && unzip -d $ANDROID_SDK_ROOT /tmp/$ANDROID_CMD \
+    && mkdir -p $ANDROID_SDK_ROOT/cmdline-tools/tools \
+    && mv $ANDROID_SDK_ROOT/cmdline-tools/bin $ANDROID_SDK_ROOT/cmdline-tools/lib $ANDROID_SDK_ROOT/cmdline-tools/tools/ \
+    && rm -rf /tmp/*
+
+RUN yes | sdkmanager --licenses \
+    && sdkmanager --verbose --no_https ${ANDROID_SDK_PACKAGES}
+
 RUN echo "no" | avdmanager --verbose create avd --force --name "${EMULATOR_NAME}" --device "${EMULATOR_DEVICE}" --package "${EMULATOR_PACKAGE}"
 
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash && \
     apt-get install -y nodejs && \
-    npm install -g appium@1.22.0 && \
+    npm install -g appium@1.22.3 && \
     exit 0 && \
     npm cache clean && \
     apt-get remove --purge -y npm && \  
@@ -50,22 +60,16 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash && \
     apt-get clean && \
     rm -Rf /tmp/* && rm -Rf /var/lib/apt/lists/*
 
-ENV EMU=./start_emu_headed.sh
-ENV EMU_HEADLESS=./start_emu_headless.sh
-ENV VNC=./start_vnc.sh
-ENV APPIUM=./start_appium.sh
-
-ENV APPIUM_PORT=4723
-
-RUN wget https://download.katalon.com/8.6.8/Katalon_Studio_Engine_Linux_64-8.6.8.tar.gz && \
-    tar -xvzf Katalon_Studio_Engine_Linux_64-8.6.8.tar.gz && \
-    rm -rf Katalon_Studio_Engine_Linux_64-8.6.8.tar.gz
+RUN wget https://download.katalon.com/${KATALON_VERSION}/Katalon_Studio_Engine_Linux_64-${KATALON_VERSION}.tar.gz && \
+    tar -xvzf Katalon_Studio_Engine_Linux_64-${KATALON_VERSION}.tar.gz && \
+    rm -rf Katalon_Studio_Engine_Linux_64-${KATALON_VERSION}.tar.gz
 
 COPY . /
 
-RUN chmod a+x start_vnc.sh && \
-    chmod a+x start_appium.sh && \
-    chmod a+x start_emu_headed.sh && \
-    chmod a+x start_emu_headless.sh
+RUN chmod a+x emulator_headed_mode.sh && \
+    chmod a+x emulator_headless_mode.sh && \
+    chmod a+x start_vnc.sh && \
+    chmod 777 portforward_vnc.sh && \
+    chmod 777 delete_pod.sh
 
 CMD [ "/bin/bash" ]
