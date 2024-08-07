@@ -17,7 +17,7 @@ free_ports
 current_dir=$(pwd)
 echo "Current directory: ${current_dir}"
 
-pod=$(minikube kubectl -- get pods --no-headers -o custom-columns=':metadata.name')
+pod=$(minikube kubectl -- get pods --no-headers -o custom-columns=':metadata.name' | grep -i deployment)
 echo "Pod name: ${pod}"
 
 status=""
