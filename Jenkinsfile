@@ -18,7 +18,7 @@ pipeline {
     stage('SCM Checkout') {
       steps{
         script {
-	  git branch: 'main', credentialsId: 'Github_cred_ssh', url: 'https://github.com/Vaibhavphale-Siddhatech/Katalon_Emulator_k8s.git'
+	  git branch: 'master', credentialsId: 'Github_cred', url: 'https://github.com/Osiris199/Katalon_Emulator_k8s.git'
         }
       }
     }
@@ -62,6 +62,7 @@ pipeline {
     	        sh '''minikube kubectl -- apply -f deployment.yaml'''
 		sh '''minikube kubectl -- apply -f android-service.yaml'''
                 sh '''minikube kubectl -- apply -f vnc-service.yaml'''
+		sh '''minikube kubectl -- apply -f hpa.yaml'''
           }
         }
       }
