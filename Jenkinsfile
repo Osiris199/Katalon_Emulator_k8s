@@ -62,7 +62,7 @@ pipeline {
     	        sh '''minikube kubectl -- apply -f deployment.yaml'''
 		sh '''minikube kubectl -- apply -f android-service.yaml'''
                 sh '''minikube kubectl -- apply -f vnc-service.yaml'''
-		sh '''minikube kubectl -- apply -f hpa.yaml'''
+		// sh '''minikube kubectl -- apply -f hpa.yaml'''
           }
         }
       }
