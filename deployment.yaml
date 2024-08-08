@@ -47,7 +47,7 @@ spec:
             limits:
               memory: "8Gi" 
           ports:
-          - containerPort: 5900
+          - containerPort: 5901
           args:
             - bash
             - -c
