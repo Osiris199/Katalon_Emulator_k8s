@@ -1,16 +1,36 @@
 #!/bin/bash
 
-free_ports() {
-    PID_LIST=$(lsof -i :5900 | awk 'NR!=1 {print $2}')
+# free_ports() {
+#     PID_LIST=$(lsof -i :5900 | awk 'NR!=1 {print $2}')
     
-    if [ -z "$PID_LIST" ]; then
-        echo "No processes found using port 5900."
-    else
-        for PID in $PID_LIST; do
-            echo "Killing process with PID $PID"
-            kill $PID
-        done
-    fi
+#     if [ -z "$PID_LIST" ]; then
+#         echo "No processes found using port 5900."
+#     else
+#         for PID in $PID_LIST; do
+#             echo "Killing process with PID $PID"
+#             kill $PID
+#         done
+#     fi
+# }
+
+free_ports() {
+    # Define the ports you want to check
+    PORTS=(5900 5901)
+
+    # Loop through each port
+    for PORT in "${PORTS[@]}"; do
+        # Get the list of PIDs using the port
+        PID_LIST=$(lsof -i :$PORT | awk 'NR!=1 {print $2}')
+        
+        if [ -z "$PID_LIST" ]; then
+            echo "No processes found using port $PORT."
+        else
+            for PID in $PID_LIST; do
+                echo "Killing process with PID $PID using port $PORT"
+                kill $PID
+            done
+        fi
+    done
 }
 
 free_ports
