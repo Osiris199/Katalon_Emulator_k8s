@@ -60,10 +60,16 @@ control_c() {
     exit
 }
 
+# copy_reports() { 
+#     POD_NAME=$(minikube kubectl -- get pods --no-headers -o custom-columns=':metadata.name' | grep -i deployment)
+#     echo "$POD_NAME"
+#     kubectl cp $POD_NAME:/empresa/Reports/. -c android-emulator /home/siddhatech/Reports
+#     echo "files transferred to /home/siddhatech/Reports path on local machine."
+# }
+
 copy_reports() { 
     POD_NAME=$(minikube kubectl -- get pods --no-headers -o custom-columns=':metadata.name' | grep -i deployment)
-    echo "$POD_NAME"
-    kubectl cp $POD_NAME:/empresa/Reports/. -c android-emulator /home/siddhatech/Reports
+    curl http://localhost:5900/empresa/Reports/. -o /home/siddhatech/Reports
     echo "files transferred to /home/siddhatech/Reports path on local machine."
 }
 
