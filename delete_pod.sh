@@ -69,7 +69,7 @@ control_c() {
 
 copy_reports() { 
     POD_NAME=$(minikube kubectl -- get pods --no-headers -o custom-columns=':metadata.name' | grep -i deployment)
-    curl http://localhost:5900/empresa/Reports/. -o /home/siddhatech/Reports
+    wget http://localhost:5900/empresa/Reports/. -o /home/siddhatech/Reports
     echo "files transferred to /home/siddhatech/Reports path on local machine."
 }
 
