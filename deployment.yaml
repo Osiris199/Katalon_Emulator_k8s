@@ -29,8 +29,7 @@ spec:
             - bash
             - -c
             - |
-              ./start_vnc.sh \
-              tail -f /dev/null
+              ./start_vnc.sh
           env:
             - name: VNC_PASSWORD
               value: "vaibhav"
