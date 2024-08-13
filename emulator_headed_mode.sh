@@ -46,7 +46,7 @@ check_hardware_acceleration_support() {
 start_emulator() {
   adb devices | grep emulator | cut -f1 | xargs -I {} adb -s "{}" emu kill
 
-  options="-avd  ${emulator_name} -no-snapshot -noaudio -no-boot-anim -memory 4096 ${hw_accel_flag} -camera-back none -gpu swiftshader_indirect"
+  options="-avd  ${emulator_name} -no-snapshot -noaudio -no-boot-anim -memory 8192 ${hw_accel_flag} -camera-back none -gpu swiftshader_indirect"
 
   if [[ "$OSTYPE" == *linux* ]] || [[ "$OSTYPE" == *darwin* ]] || [[ "$OSTYPE" == *macos* ]]; then
     echo "${OSTYPE}: emulator ${options}"
