@@ -20,9 +20,9 @@ spec:
           image: vaibhavx7/android-emulator:latest
           resources:
             requests:
-              memory: "2Gi"
+              memory: "1Gi"
             limits:
-              memory: "4Gi" 
+              memory: "2Gi" 
           ports:
           - containerPort: 5900
           args:
