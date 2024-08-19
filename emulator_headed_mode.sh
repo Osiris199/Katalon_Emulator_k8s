@@ -50,7 +50,7 @@ start_emulator() {
 
   if [[ "$OSTYPE" == *linux* ]] || [[ "$OSTYPE" == *darwin* ]] || [[ "$OSTYPE" == *macos* ]]; then
     echo "${OSTYPE}: emulator ${options}"
-    nohup emulator ${options} &
+    emulator ${options} &
   else
     echo "Unsupported OS"
     return 1
