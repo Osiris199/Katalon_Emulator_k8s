@@ -62,7 +62,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash && \
 
 RUN wget https://download.katalon.com/${KATALON_VERSION}/Katalon_Studio_Engine_Linux_64-${KATALON_VERSION}.tar.gz && \
     tar -xvzf Katalon_Studio_Engine_Linux_64-${KATALON_VERSION}.tar.gz && \
-    rm -rf Katalon_Studio_Engine_Linux_64-${KATALON_VERSION}.tar.gz
+    rm -rf Katalon_Studio_Engine_Linux_64-${KATALON_VERSION}.tar.gz && \
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    apt install ./google-chrome-stable_current_amd64.deb
 
 COPY . /
 
