@@ -1,6 +1,9 @@
 #!/bin/bash
 
 main_function() {
+    echo "katalon report path is $KATALON_REPORT_PATH"
+    echo "katalon report path local is $KATALON_LOCAL_REPORT_PATH"
+
     printf "===> SCRIPT FOR CHECKING CASE STATUS AND TERMINATING POD <===\n"
     check_katalon_process
     sleep 2
