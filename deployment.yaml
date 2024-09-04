@@ -59,6 +59,10 @@ spec:
               value: "4725"
             - name: VNC_PASSWORD
               value: "vaibhav"
+            - name: KATALON_REPORT_PATH
+              value: "empresa/Reports/."
+            - name: KATALON_LOCAL_REPORT_PATH
+              value: "/home/siddhatech/Reports"
           securityContext:
               privileged: true
           stdin: true
