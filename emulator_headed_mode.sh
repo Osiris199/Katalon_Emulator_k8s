@@ -4,14 +4,13 @@ emulator_name=${EMULATOR_NAME}
 katalon_version=${KATALON_VERSION}
 test_suite=${TEST_SUITE_NAME}
 
-echo "katalon report path is $KATALON_REPORT_PATH"
-echo "katalon report path local is $KATALON_LOCAL_REPORT_PATH"
-echo "Script is running"
-echo "Current user: $(whoami)"
-echo "Environment variables:"
-printenv
-
 main_function() {
+    echo "katalon report path is $KATALON_REPORT_PATH"
+    echo "katalon report path local is $KATALON_LOCAL_REPORT_PATH"
+    echo "Script is running"
+    echo "Current user: $(whoami)"
+    echo "Environment variables:"
+    printenv
     printf "===> SCRIPT FOR STARTING EMULATOR AND KATALON CASES <===\n"
     echo "test suite name : ${test_suite}"
     check_hardware_acceleration_support
