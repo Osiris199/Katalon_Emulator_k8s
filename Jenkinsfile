@@ -12,6 +12,8 @@ pipeline {
   parameters {
         string(name: 'TEST_SUITE', defaultValue: '', description: 'Name of test suite to be executed')
 	string(name: 'TYPE_OF_TEST', defaultValue: '', description: 'Type of test cases to be executed')
+	string(name: 'EXEC_PROFILE', defaultValue: '', description: 'Test execution profile')
+	  
   }
 
   stages {
@@ -32,7 +34,7 @@ pipeline {
         } 
 	steps {
                script {
-          	   dockerImage = docker.build(dockerimagename, "--build-arg TEST_SUITE=\"${params.TEST_SUITE}\" -f ${env.WORKSPACE}/Dockerfile_Android .")
+          	   dockerImage = docker.build(dockerimagename, "--build-arg TEST_SUITE=\"${params.TEST_SUITE}\" --build-arg TYPE_OF_TEST=\"${params.TYPE_OF_TEST}\" --build-arg EXEC_PROFILE=\"${params.EXEC_PROFILE}\" -f ${env.WORKSPACE}/Dockerfile_Android .")
         	}
         }
     }
