@@ -72,7 +72,7 @@ pipeline {
 	steps {
 	  script {
 		  sh "chmod +x -R ${env.WORKSPACE}"
-              	  sh "sudo -u siddhatech ./portforward_vnc.sh"
+              	  sh "sudo -u root ./portforward_vnc.sh"
 	  }
         }
      }
@@ -81,7 +81,7 @@ pipeline {
 	steps {
 	   script {
 		   sh "chmod +x -R ${env.WORKSPACE}"
-          	   sh "sudo -u siddhatech ./delete_pod.sh"
+          	   sh "sudo -u root ./delete_pod.sh"
 	}
       }
     }
