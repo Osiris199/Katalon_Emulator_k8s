@@ -9,7 +9,7 @@ api_key=${API_KEY}
 
 main_function() {
     printf "===> SCRIPT FOR STARTING EMULATOR AND KATALON CASES <===\n"
-    echo "test suite name : ${test_suite}"
+    
     check_hardware_acceleration_support
     sleep 2
     start_emulator
@@ -82,8 +82,7 @@ check_emulator_boot_status () {
     if [ "$result" == "1" ]; then
       printf "\e[K===> Emulator is ready : '$result' <===\n"
       cd Katalon_Studio_Engine_Linux_64-${katalon_version}
-      #./katalonc -noSplash -runMode=console -projectPath="/empresa/BanReservas-Android-New.prj" -retry=0 -testSuitePath="Test Suites/PAYMENTS/TS12_Pago_Prestamos_Interbanc_Benef_Pago_ACH" -browserType="Android" -deviceId="emulator-5554" -executionProfile="local" -apiKey="2b233a8b-743d-44bd-8e85-dc990101c95e"
-      ./katalonc -noSplash -runMode=console -projectPath="/empresa/Android Mobile Tests with Katalon Studio.prj" -retry=0 -testSuitePath="Test Suites/${test_suite}" -browserType="$type_of_test" -deviceId="emulator-5554" -executionProfile="$execution_profile" -apiKey="$api_key"
+      katalon_cmd
       break
     elif [ "$result" == "" ]; then
       printf "===> Emulator is still booting! ${spinner[$i]} <===\r"
@@ -113,6 +112,10 @@ disable_emulator_animations() {
 
 apply_hidden_policy() {
   adb shell "settings put global hidden_api_policy_pre_p_apps 1;settings put global hidden_api_policy_p_apps 1;settings put global hidden_api_policy 1"
+}
+
+katalon_cmd() {
+  ./katalonc -noSplash -runMode=console -projectPath="/empresa/Android Mobile Tests with Katalon Studio.prj" -retry=0 -testSuitePath="Test Suites/${test_suite}" -browserType="$type_of_test" -deviceId="emulator-5554" -executionProfile="$execution_profile" -apiKey="$api_key"
 }
 
 control_c() {
