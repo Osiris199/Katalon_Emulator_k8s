@@ -5,6 +5,7 @@ katalon_version=${KATALON_VERSION}
 test_suite=${TEST_SUITE}
 type_of_test=${TYPE_OF_TEST}
 execution_profile=${EXEC_PROFILE}
+api_key=${API_KEY}
 
 main_function() {
     printf "===> SCRIPT FOR STARTING EMULATOR AND KATALON CASES <===\n"
@@ -81,7 +82,7 @@ check_emulator_boot_status () {
       printf "\e[K===> Emulator is ready : '$result' <===\n"
       cd Katalon_Studio_Engine_Linux_64-${katalon_version}
       #./katalonc -noSplash -runMode=console -projectPath="/empresa/BanReservas-Android-New.prj" -retry=0 -testSuitePath="Test Suites/PAYMENTS/TS12_Pago_Prestamos_Interbanc_Benef_Pago_ACH" -browserType="Android" -deviceId="emulator-5554" -executionProfile="local" -apiKey="2b233a8b-743d-44bd-8e85-dc990101c95e"
-      ./katalonc -noSplash -runMode=console -projectPath="/empresa/Android Mobile Tests with Katalon Studio.prj" -retry=0 -testSuitePath="Test Suites/${test_suite}" -browserType="$type_of_test" -deviceId="emulator-5554" -executionProfile="$execution_profile" -apiKey="2b233a8b-743d-44bd-8e85-dc990101c95e"
+      ./katalonc -noSplash -runMode=console -projectPath="/empresa/Android Mobile Tests with Katalon Studio.prj" -retry=0 -testSuitePath="Test Suites/${test_suite}" -browserType="$type_of_test" -deviceId="emulator-5554" -executionProfile="$execution_profile" -apiKey="$api_key"
       break
     elif [ "$result" == "" ]; then
       printf "===> Emulator is still booting! ${spinner[$i]} <===\r"
