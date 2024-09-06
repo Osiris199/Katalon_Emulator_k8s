@@ -9,17 +9,20 @@ api_key=${API_KEY}
 
 main_function() {
     printf "===> SCRIPT FOR STARTING EMULATOR AND KATALON CASES <===\n"
-    
-    check_hardware_acceleration_support
-    sleep 2
-    start_emulator
-    sleep 2
-    check_emulator_boot_status
-    sleep 2
-    disable_emulator_animations
-    sleep 2
-    apply_hidden_policy
-    sleep 2
+    if [[ "$type_of_test" == "Android" ]]; then
+        check_hardware_acceleration_support
+        sleep 2
+        start_emulator
+        sleep 2
+        check_emulator_boot_status
+        sleep 2
+        disable_emulator_animations
+        sleep 2
+        apply_hidden_policy
+        sleep 2
+    else
+        katalon_cmd
+    fi
 }
 
 check_hardware_acceleration_support() {
