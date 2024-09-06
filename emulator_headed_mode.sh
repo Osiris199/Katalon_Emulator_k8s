@@ -6,6 +6,7 @@ test_suite=${TEST_SUITE_NAME}
 type_of_test=${TYPE_OF_TEST}
 execution_profile=${EXEC_PROFILE}
 api_key=${API_KEY}
+project_name=${PROJECT_NAME}
 
 main_function() {
     printf "===> SCRIPT FOR STARTING EMULATOR AND KATALON CASES <===\n"
@@ -118,7 +119,7 @@ apply_hidden_policy() {
 }
 
 katalon_cmd() {
-  ./katalonc -noSplash -runMode=console -projectPath="/empresa/Android Mobile Tests with Katalon Studio.prj" -retry=0 -testSuitePath="Test Suites/${test_suite}" -browserType="$type_of_test" -deviceId="emulator-5554" -executionProfile="$execution_profile" -apiKey="$api_key"
+  ./katalonc -noSplash -runMode=console -projectPath="/empresa/${project_name}.prj" -retry=0 -testSuitePath="Test Suites/${test_suite}" -browserType="$type_of_test" -deviceId="emulator-5554" -executionProfile="$execution_profile" -apiKey="$api_key"
 }
 
 control_c() {
