@@ -9,16 +9,20 @@ api_key=${API_KEY}
 
 main_function() {
     printf "===> SCRIPT FOR STARTING EMULATOR AND KATALON CASES <===\n"
-    check_hardware_acceleration_support
-    sleep 2
-    start_emulator
-    sleep 2
-    check_emulator_boot_status
-    sleep 2
-    disable_emulator_animations
-    sleep 2
-    apply_hidden_policy
-    sleep 2
+    if [[ "$type_of_test" == "Android" ]]; then
+        check_hardware_acceleration_support
+        sleep 2
+        start_emulator
+        sleep 2
+        check_emulator_boot_status
+        sleep 2
+        disable_emulator_animations
+        sleep 2
+        apply_hidden_policy
+        sleep 2
+    else
+        katalon_cmd
+    fi
 }
 
 check_hardware_acceleration_support() {
@@ -81,8 +85,7 @@ check_emulator_boot_status () {
     if [ "$result" == "1" ]; then
       printf "\e[K===> Emulator is ready : '$result' <===\n"
       cd Katalon_Studio_Engine_Linux_64-${katalon_version}
-      #./katalonc -noSplash -runMode=console -projectPath="/empresa/BanReservas-Android-New.prj" -retry=0 -testSuitePath="Test Suites/PAYMENTS/TS12_Pago_Prestamos_Interbanc_Benef_Pago_ACH" -browserType="Android" -deviceId="emulator-5554" -executionProfile="local" -apiKey="2b233a8b-743d-44bd-8e85-dc990101c95e"
-      ./katalonc -noSplash -runMode=console -projectPath="/empresa/Android Mobile Tests with Katalon Studio.prj" -retry=0 -testSuitePath="Test Suites/${test_suite}" -browserType="$type_of_test" -deviceId="emulator-5554" -executionProfile="$execution_profile" -apiKey="$api_key"
+      katalon_cmd
       break
     elif [ "$result" == "" ]; then
       printf "===> Emulator is still booting! ${spinner[$i]} <===\r"
@@ -108,6 +111,10 @@ disable_emulator_animations() {
   adb shell "settings put global window_animation_scale 0.0"
   adb shell "settings put global transition_animation_scale 0.0"
   adb shell "settings put global animator_duration_scale 0.0"
+}
+
+katalon_cmd() {
+ ./katalonc -noSplash -runMode=console -projectPath="/empresa/Android Mobile Tests with Katalon Studio.prj" -retry=0 -testSuitePath="Test Suites/${test_suite}" -browserType="$type_of_test" -deviceId="emulator-5554" -executionProfile="$execution_profile" -apiKey="$api_key"
 }
 
 apply_hidden_policy() {
