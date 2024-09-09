@@ -60,10 +60,31 @@ control_c() {
     exit
 }
 
-copy_reports() { 
+# copy_reports() { 
+#     POD_NAME=$(minikube kubectl -- get pods --no-headers -o custom-columns=':metadata.name' | grep -i deployment)
+#     kubectl cp $POD_NAME:/empresa/Reports/. -c android-emulator /home/siddhatech/Reports
+#     echo "files transferred to /home/siddhatech/Reports path on local machine."
+# }
+
+copy_reports() {
     POD_NAME=$(minikube kubectl -- get pods --no-headers -o custom-columns=':metadata.name' | grep -i deployment)
-    kubectl cp $POD_NAME:/empresa/Reports/. -c android-emulator /home/siddhatech/Reports
-    echo "files transferred to /home/siddhatech/Reports path on local machine."
+    
+    # Define retry parameters
+    RETRIES=5
+    DELAY=10
+
+    for ((i=0; i<$RETRIES; i++)); do
+        if kubectl cp $POD_NAME:/empresa/Reports/. -c android-emulator /home/siddhatech/Reports; then
+            echo "Files transferred to /home/siddhatech/Reports path on local machine."
+            return 0
+        else
+            echo "Retry $((i+1)) failed. Waiting for $DELAY seconds before retrying..."
+            sleep $DELAY
+        fi
+    done
+
+    echo "Failed to transfer files after $RETRIES retries."
+    return 1
 }
 
 trap control_c SIGINT SIGTERM SIGHUP
