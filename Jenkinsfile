@@ -15,7 +15,6 @@ pipeline {
 	string(name: 'TYPE_OF_TEST', defaultValue: '', description: 'Type of test cases to be executed')
 	string(name: 'EXEC_PROFILE', defaultValue: '', description: 'Test execution profile')
 	string(name: 'PROJECT_NAME', defaultValue: '', description: 'Name of project to execute')
-	string(name: 'MY_SECRET_KEY', defaultValue: '', description: 'API key')
   }
 
   stages {
@@ -36,7 +35,7 @@ pipeline {
         } 
 	steps {
                script {
-          	   dockerImage = docker.build(dockerimagename, "--build-arg TEST_SUITE=\"${params.TEST_SUITE}\" --build-arg TYPE_OF_TEST=\"${params.TYPE_OF_TEST}\" --build-arg MY_SECRET_KEY=\"${params.MY_SECRET_KEY}\" --build-arg EXEC_PROFILE=\"${params.EXEC_PROFILE}\" --build-arg PROJECT_NAME=\"${params.PROJECT_NAME}\" -f ${env.WORKSPACE}/Dockerfile_Android .")
+          	   dockerImage = docker.build(dockerimagename, "--build-arg TEST_SUITE=\"${params.TEST_SUITE}\" --build-arg TYPE_OF_TEST=\"${params.TYPE_OF_TEST}\" --build-arg EXEC_PROFILE=\"${params.EXEC_PROFILE}\" --build-arg PROJECT_NAME=\"${params.PROJECT_NAME}\" -f ${env.WORKSPACE}/Dockerfile_Android .")
         	}
         }
     }
