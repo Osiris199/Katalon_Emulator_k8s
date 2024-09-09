@@ -14,7 +14,6 @@ pipeline {
         string(name: 'TEST_SUITE', defaultValue: '', description: 'Name of test suite to be executed')
 	string(name: 'TYPE_OF_TEST', defaultValue: '', description: 'Type of test cases to be executed')
 	string(name: 'EXEC_PROFILE', defaultValue: '', description: 'Test execution profile')
-	string(name: 'API_KEY', defaultValue: '${env.MY_SECRET_KEY}', description: 'API key of katalon')
 	string(name: 'PROJECT_NAME', defaultValue: '', description: 'Name of project to execute')
   }
 
@@ -36,7 +35,7 @@ pipeline {
         } 
 	steps {
                script {
-          	   dockerImage = docker.build(dockerimagename, "--build-arg TEST_SUITE=\"${params.TEST_SUITE}\" --build-arg TYPE_OF_TEST=\"${params.TYPE_OF_TEST}\" --build-arg EXEC_PROFILE=\"${params.EXEC_PROFILE}\" --build-arg API_KEY=\"${params.API_KEY}\" --build-arg PROJECT_NAME=\"${params.PROJECT_NAME}\" -f ${env.WORKSPACE}/Dockerfile_Android .")
+          	   dockerImage = docker.build(dockerimagename, "--build-arg TEST_SUITE=\"${params.TEST_SUITE}\" --build-arg TYPE_OF_TEST=\"${params.TYPE_OF_TEST}\" --build-arg EXEC_PROFILE=\"${params.EXEC_PROFILE}\" --build-arg PROJECT_NAME=\"${params.PROJECT_NAME}\" -f ${env.WORKSPACE}/Dockerfile_Android .")
         	}
         }
     }
