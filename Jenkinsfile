@@ -2,7 +2,7 @@ pipeline {
 
   environment {
     HOME = "${env.WORKSPACE}"
-    MY_SECRET_KEY = credentials('API_KEY')
+    MY_SECRET_KEY = credentials('Katalon_API_key')
     imageCheck = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator', returnStdout: true).trim()
     dockerimagename = "vaibhavx7/android-emulator"
     dockerImage = ""
