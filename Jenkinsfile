@@ -22,6 +22,7 @@ pipeline {
     stage('SCM Checkout') {
       steps{
         script {
+	  echo "$MY_SECRET_KEY"
 	  git branch: 'master', credentialsId: 'Github_cred', url: 'https://github.com/Osiris199/Katalon_Emulator_k8s.git'
         }
       }
