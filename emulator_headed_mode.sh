@@ -5,7 +5,7 @@ katalon_version=${KATALON_VERSION}
 test_suite=${TEST_SUITE_NAME}
 type_of_test=${TYPE_OF_TEST}
 execution_profile=${EXEC_PROFILE}
-api_key=${MY_SECRET_KEY}
+api_key=${API_KEY}
 project_name=${PROJECT_NAME}
 
 main_function() {
