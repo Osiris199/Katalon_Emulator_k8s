@@ -22,6 +22,7 @@ main_function() {
         apply_hidden_policy
         sleep 2
     else
+        cd Katalon_Studio_Engine_Linux_64-${katalon_version}
         katalon_cmd
     fi
 }
