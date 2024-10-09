@@ -120,8 +120,7 @@ apply_hidden_policy() {
 }
 
 katalon_cmd() {
-  #./katalonc -noSplash -runMode=console -projectPath="/empresa/${project_name}.prj" -retry=0 -testSuitePath="Test Suites/${test_suite}" -browserType="$type_of_test" -deviceId="emulator-5554" -executionProfile="$execution_profile" -apiKey="$api_key" --config -webui.autoUpdateDrivers=true
- ./katalonc -noSplash -runMode=console -projectPath="/empresa/${project_name}.prj" -retry=0 -testSuitePath="Test Suites/${test_suite}" -browserType="$type_of_test" -deviceId="emulator-5554" -executionProfile="$execution_profile" --config -webui.autoUpdateDrivers=true
+  ./katalonc -noSplash -runMode=console -projectPath="/empresa/${project_name}.prj" -retry=0 -testSuitePath="Test Suites/${test_suite}" -browserType="$type_of_test" -deviceId="emulator-5554" -executionProfile="$execution_profile" -apiKey="$api_key" --config -webui.autoUpdateDrivers=true
 }
 
 control_c() {
