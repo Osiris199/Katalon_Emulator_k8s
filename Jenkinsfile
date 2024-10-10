@@ -83,14 +83,14 @@ pipeline {
         }
      }
 
- //    stage('Check case status and Terminate pod') {
-	// steps {
-	//    script {
-	// 	   sh "chmod +x -R ${env.WORKSPACE}"
- //          	   sh "sudo -u siddhatech ./delete_pod.sh"
-	// }
- //      }
- //    }
+    stage('Check case status and Terminate pod') {
+	steps {
+	   script {
+		   sh "chmod +x -R ${env.WORKSPACE}"
+          	   sh "sudo -u siddhatech ./delete_pod.sh"
+	}
+      }
+    }
   }
 
 }
