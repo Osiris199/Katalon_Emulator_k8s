@@ -59,8 +59,6 @@ spec:
               value: "4725"
             - name: VNC_PASSWORD
               value: "vaibhav"
-            - name: WEBDRIVER
-              value: "4444"
           securityContext:
               privileged: true
           stdin: true
