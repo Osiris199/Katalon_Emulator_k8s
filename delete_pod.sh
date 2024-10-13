@@ -65,7 +65,7 @@ copy_reports() {
     
     # Define retry parameters
     RETRIES=5
-    DELAY=120
+    DELAY=60
 
     for ((i=0; i<$RETRIES; i++)); do
         if kubectl cp $POD_NAME:/empresa/Reports/. -c android-emulator /home/siddhatech/Reports; then
