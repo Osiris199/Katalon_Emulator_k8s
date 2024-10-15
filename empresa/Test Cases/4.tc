@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>- An automation script to help user getting started with Mobile automation testing.
+- Script Content: Open the application and verify the items show full when the items over loading</description>
+   <name>4</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>3d89ed20-b34e-49a3-ba1c-d654577890fa</testCaseGuid>
+</TestCaseEntity>

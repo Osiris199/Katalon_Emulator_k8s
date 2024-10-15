@@ -2,6 +2,7 @@ import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 
 import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
+import com.kms.katalon.core.util.KeywordUtil
 import com.kms.katalon.core.util.internal.PathUtil
 
 import internal.GlobalVariable
@@ -29,6 +30,8 @@ Mobile.comment('Then the current screen should show Xfermodes text after scrolli
 def itemText = Mobile.getText(findTestObject('Application/Graphics/android.widget.TextView - Xfermodes'), GlobalVariable.G_Timeout)
 
 Mobile.verifyEqual(itemText, 'Xfermodes')
+
+KeywordUtil.logInfo("Last part of case 10")
 
 Mobile.closeApplication()
 
