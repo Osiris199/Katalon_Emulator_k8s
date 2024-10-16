@@ -29,8 +29,7 @@ spec:
             - bash
             - -c
             - |
-              ./start_vnc.sh
-              tail -f /dev/null
+              ./start_vnc.sh && tail -f /dev/null
           env:
             - name: VNC_PASSWORD
               value: "vaibhav"
@@ -52,8 +51,7 @@ spec:
             - bash
             - -c
             - |
-              ./emulator_headed_mode.sh \
-              tail -f /dev/null
+              ./emulator_headed_mode.sh && tail -f /dev/null
           env:
             - name: APPIUM_PORT
               value: "4725"
