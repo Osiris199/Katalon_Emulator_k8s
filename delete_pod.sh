@@ -48,6 +48,7 @@ check_suite_status() {
 }
 
 delete_pod() {
+  sleep 60
   copy_reports
   kubectl delete deployment deployment -n default
   kubectl delete service android-service
