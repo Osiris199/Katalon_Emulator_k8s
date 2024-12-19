@@ -31,16 +31,22 @@ pipeline {
     stage('Check Docker Image') {
     steps {
         script {
-            def imageCheckRaw = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStdout: true)
-		echo "imageCheckRaw ${imageCheckRaw}"
-            if (imageCheckRaw instanceof String && imageCheckRaw != "") {
-                def imageCheck = imageCheckRaw.trim() 
-                echo "imageCheck result: ${imageCheck}"
-                env.imageCheck = imageCheck
-            } else {
-                echo "No image found for vaibhavx7/android-emulator."
-                env.imageCheck = ""
-            }
+		try{
+		   def imageCheckRaw = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStdout: true)
+		   echo "imageCheckRaw ${imageCheckRaw}"
+		} catch (Exception e) {
+                   echo "Error occurred: ${e.message}"
+                   env.imageCheck = ""
+            	}
+		
+	        if (imageCheckRaw instanceof String && imageCheckRaw != "") {
+	          def imageCheck = imageCheckRaw.trim() 
+                  echo "imageCheck result: ${imageCheck}"
+	          env.imageCheck = imageCheck
+	       } else {
+                  echo "No image found for vaibhavx7/android-emulator."
+                  env.imageCheck = ""
+               }
         }
      }
    }
