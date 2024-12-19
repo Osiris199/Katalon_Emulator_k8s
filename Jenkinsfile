@@ -31,8 +31,9 @@ pipeline {
     stage('Check Docker Image') {
     steps {
         script {
+		def imageCheckRaw 
 		try{
-		   def imageCheckRaw = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStdout: true)
+		   imageCheckRaw = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStdout: true)
 		   echo "imageCheckRaw ${imageCheckRaw}"
 		} catch (Exception e) {
                    echo "Error occurred: ${e.message}"
