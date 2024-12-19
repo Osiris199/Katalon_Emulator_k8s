@@ -31,7 +31,7 @@ pipeline {
     stage('Check Docker Image') {
       steps {
         script {
-           def imageCheck = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStdout: true).trim()
+           def imageCheck = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStatus: true, returnStdout: true).trim()
            env.imageCheck = imageCheck
            echo "imageCheck result: ${env.imageCheck}"
         }
