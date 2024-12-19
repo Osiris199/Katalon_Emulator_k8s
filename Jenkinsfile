@@ -3,7 +3,6 @@ pipeline {
   environment {
     HOME = "${env.WORKSPACE}"
     MY_SECRET_KEY = credentials('Katalon_API_key')
-    imageCheck = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStdout: true).trim()
     dockerimagename = "vaibhavx7/android-emulator"
     dockerImage = ""
   }
@@ -29,6 +28,16 @@ pipeline {
       }
     }
 
+    stage('Check Docker Image') {
+      steps {
+        script {
+           def imageCheck = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStdout: true).trim()
+           env.imageCheck = imageCheck
+           echo "imageCheck result: ${env.imageCheck}"
+        }
+      }
+    }
+
     stage('Build image') {
        when {
 	        expression {
@@ -38,7 +47,8 @@ pipeline {
 	steps {
                script {
           	   dockerImage = docker.build(dockerimagename, "--build-arg TEST_SUITE=\"${params.TEST_SUITE}\" --build-arg TYPE_OF_TEST=\"${params.TYPE_OF_TEST}\" --build-arg API_KEY=\"${params.API_KEY}\" --build-arg EXEC_PROFILE=\"${params.EXEC_PROFILE}\" --build-arg PROJECT_NAME=\"${params.PROJECT_NAME}\" -f ${env.WORKSPACE}/Dockerfile_Android .")
-        	}
+        	   echo "Docker image built: ${dockerImage}"
+	       }
         }
     }
 
