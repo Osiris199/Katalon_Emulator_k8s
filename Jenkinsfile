@@ -29,14 +29,20 @@ pipeline {
     }
 
     stage('Check Docker Image') {
-      steps {
+    steps {
         script {
-           def imageCheck = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStatus: true, returnStdout: true).trim()
-           env.imageCheck = imageCheck
-           echo "imageCheck result: ${env.imageCheck}"
+            def imageCheckRaw = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStdout: true).trim()
+            if (imageCheckRaw) {
+                def imageCheck = imageCheckRaw.trim() 
+                echo "imageCheck result: ${imageCheck}"
+                env.imageCheck = imageCheck
+            } else {
+                echo "No image found for vaibhavx7/android-emulator."
+                env.imageCheck = ""
+            }
         }
-      }
-    }
+     }
+   }
 
     stage('Build image') {
        when {
