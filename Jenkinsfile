@@ -11,6 +11,7 @@ pipeline {
   agent any
 
   parameters {
+	  //added comment for checking
         string(name: 'TEST_SUITE', defaultValue: '', description: 'Name of test suite to be executed')
 	string(name: 'TYPE_OF_TEST', defaultValue: '', description: 'Type of test cases to be executed')
 	string(name: 'EXEC_PROFILE', defaultValue: '', description: 'Test execution profile')
