@@ -5,6 +5,7 @@ pipeline {
     MY_SECRET_KEY = credentials('Katalon_API_key')
     dockerimagename = "vaibhavx7/android-emulator"
     dockerImage = ""
+    GIT_COMMIT = ""
   }
   
   agent any
@@ -24,10 +25,27 @@ pipeline {
       steps{
         script {
 	  git branch: 'master', credentialsId: 'Github_cred', url: 'https://github.com/Osiris199/Katalon_Emulator_k8s.git'
+	  env.GIT_COMMIT = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
         }
       }
     }
 
+    stage('Check for Code Changes') {
+      steps {
+        script {
+          def changes = sh(script: "git diff --exit-code || echo 'changes'", returnStdout: true).trim()
+
+          if (changes == 'changes') {
+            echo "Code has changed. Proceeding with Docker image build and push."
+            env.CHANGES_DETECTED = 'true'
+          } else {
+            echo "No code changes detected. Skipping Docker image build and push."
+            env.CHANGES_DETECTED = 'false'
+          }
+        }
+      }
+    }
+	  
     stage('Check Docker Image') {
     steps {
         script {
@@ -55,7 +73,7 @@ pipeline {
     stage('Build image') {
        when {
 	        expression {
-	           return !(env.imageCheck == "vaibhavx7/android-emulator")
+		   return env.CHANGES_DETECTED == 'true' && !(env.imageCheck == "vaibhavx7/android-emulator")
 	        }
         } 
 	steps {
@@ -72,7 +90,7 @@ pipeline {
        }
        when {
 	        expression {
-	           return !(env.imageCheck == "vaibhavx7/android-emulator")
+	          return env.CHANGES_DETECTED == 'true' && !(env.imageCheck == "vaibhavx7/android-emulator")
 	        }
         }
 	steps {
