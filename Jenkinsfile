@@ -32,7 +32,8 @@ pipeline {
     steps {
         script {
             def imageCheckRaw = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStatus: true, returnStdout: true)
-            if (imageCheckRaw) {
+		 echo "imageCheck result: ${imageCheckRaw}"
+            if (imageCheckRaw != "") {
                 def imageCheck = imageCheckRaw.trim() 
                 echo "imageCheck result: ${imageCheck}"
                 env.imageCheck = imageCheck
