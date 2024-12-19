@@ -31,7 +31,7 @@ pipeline {
     stage('Check Docker Image') {
     steps {
         script {
-            def imageCheckRaw = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStatus: true, returnStdout: true)
+            def imageCheckRaw = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStdout: true)
 		echo "imageCheckRaw ${imageCheckRaw}"
             if (imageCheckRaw instanceof String && imageCheckRaw != "") {
                 def imageCheck = imageCheckRaw.trim() 
