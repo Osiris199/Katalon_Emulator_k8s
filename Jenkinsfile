@@ -6,6 +6,7 @@ pipeline {
     dockerimagename = "vaibhavx7/android-emulator"
     dockerImage = ""
     GIT_COMMIT = ""
+    PREVIOUS_COMMIT = ""
   }
   
   agent any
@@ -27,6 +28,7 @@ pipeline {
         script {
 	  git branch: 'master', credentialsId: 'Github_cred', url: 'https://github.com/Osiris199/Katalon_Emulator_k8s.git'
 	  env.GIT_COMMIT = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+          echo "Current Commit: ${env.GIT_COMMIT}"
         }
       }
     }
@@ -34,9 +36,11 @@ pipeline {
     stage('Check for Code Changes') {
       steps {
         script {
-          def changes = sh(script: "git diff --exit-code || echo 'changes'", returnStdout: true).trim()
+          def lastCommit = sh(script: "git log --pretty=format:'%H' -n 1", returnStdout: true).trim()
+          env.PREVIOUS_COMMIT = lastCommit
+          echo "Previous Commit: ${env.PREVIOUS_COMMIT}"
 
-          if (changes == 'changes') {
+          if (env.GIT_COMMIT != env.PREVIOUS_COMMIT) {
             echo "Code has changed. Proceeding with Docker image build and push."
             env.CHANGES_DETECTED = 'true'
           } else {
