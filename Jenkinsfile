@@ -56,7 +56,7 @@ pipeline {
     stage('Build image') {
        when {
 	        expression {
-		   return !(env.imageCheck == "vaibhavx7/android-emulator") && currentBuild.changeSets.size() == 0
+		   return !(env.imageCheck == "vaibhavx7/android-emulator") && currentBuild.changeSets.size() > 0
 	        }
         } 
 	steps {
@@ -73,7 +73,7 @@ pipeline {
        }
        when {
 	        expression {
-	          return !(env.imageCheck == "vaibhavx7/android-emulator") && currentBuild.changeSets.size() == 0
+	          return !(env.imageCheck == "vaibhavx7/android-emulator") && currentBuild.changeSets.size() > 0
 	        }
         }
 	steps {
