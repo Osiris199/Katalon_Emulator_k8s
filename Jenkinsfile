@@ -25,8 +25,6 @@ pipeline {
       steps{
         script {
 	  git branch: 'master', credentialsId: 'Github_cred', url: 'https://github.com/Osiris199/Katalon_Emulator_k8s.git'
-	  env.GIT_COMMIT = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
-          echo "Current Commit: ${env.GIT_COMMIT}"
         }
       }
     }
@@ -58,7 +56,7 @@ pipeline {
     stage('Build image') {
        when {
 	        expression {
-		   return env.CHANGES_DETECTED == 'true' && !(env.imageCheck == "vaibhavx7/android-emulator") && currentBuild.changeSets.size() == 0
+		   return !(env.imageCheck == "vaibhavx7/android-emulator") && currentBuild.changeSets.size() == 0
 	        }
         } 
 	steps {
@@ -75,7 +73,7 @@ pipeline {
        }
        when {
 	        expression {
-	          return env.CHANGES_DETECTED == 'true' && !(env.imageCheck == "vaibhavx7/android-emulator") && currentBuild.changeSets.size() == 0
+	          return !(env.imageCheck == "vaibhavx7/android-emulator") && currentBuild.changeSets.size() == 0
 	        }
         }
 	steps {
