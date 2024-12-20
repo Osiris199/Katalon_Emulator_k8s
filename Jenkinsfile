@@ -119,4 +119,14 @@ pipeline {
     }
   }
 
+  post {
+        always {
+            emailext(
+                to: 'vaibhavp@siddhatech.com',
+                subject: "Build #${env.BUILD_NUMBER} Complete",
+                body: "The build #${env.BUILD_NUMBER} has completed."
+            )
+        }
+    }
+	
 }
