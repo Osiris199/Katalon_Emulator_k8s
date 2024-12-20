@@ -30,34 +30,35 @@ pipeline {
       }
     }
 	  
-    stage('Check Docker Image') {
-    steps {
-        script {
-		def imageCheckRaw 
-		try{
-		   imageCheckRaw = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStdout: true)
-		   echo "imageCheckRaw ${imageCheckRaw}"
-		} catch (Exception e) {
-                   echo "Error occurred: ${e.message}"
-                   env.imageCheck = ""
-            	}
+  //   stage('Check Docker Image') {
+  //   steps {
+  //       script {
+		// def imageCheckRaw 
+		// try{
+		//    imageCheckRaw = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStdout: true)
+		//    echo "imageCheckRaw ${imageCheckRaw}"
+		// } catch (Exception e) {
+  //                  echo "Error occurred: ${e.message}"
+  //                  env.imageCheck = ""
+  //           	}
 		
-	        if (imageCheckRaw instanceof String && imageCheckRaw != "") {
-	          def imageCheck = imageCheckRaw.trim() 
-                  echo "imageCheck result: ${imageCheck}"
-	          env.imageCheck = imageCheck
-	       } else {
-                  echo "No image found for vaibhavx7/android-emulator."
-                  env.imageCheck = ""
-               }
-        }
-     }
-   }
+	 //        if (imageCheckRaw instanceof String && imageCheckRaw != "") {
+	 //          def imageCheck = imageCheckRaw.trim() 
+  //                 echo "imageCheck result: ${imageCheck}"
+	 //          env.imageCheck = imageCheck
+	 //       } else {
+  //                 echo "No image found for vaibhavx7/android-emulator."
+  //                 env.imageCheck = ""
+  //              }
+  //       }
+  //    }
+  //  }
 
     stage('Build image') {
        when {
 	        expression {
-		   return !(env.imageCheck == "vaibhavx7/android-emulator") && currentBuild.changeSets.size() > 0
+		   // return !(env.imageCheck == "vaibhavx7/android-emulator") && currentBuild.changeSets.size() > 0
+		   return currentBuild.changeSets.size() > 0	
 	        }
         } 
 	steps {
@@ -74,7 +75,8 @@ pipeline {
        }
        when {
 	        expression {
-	          return !(env.imageCheck == "vaibhavx7/android-emulator") && currentBuild.changeSets.size() > 0
+	          // return !(env.imageCheck == "vaibhavx7/android-emulator") && currentBuild.changeSets.size() > 0
+		  return currentBuild.changeSets.size() > 0
 	        }
         }
 	steps {
