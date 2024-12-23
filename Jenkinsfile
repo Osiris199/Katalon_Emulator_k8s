@@ -4,6 +4,8 @@ pipeline {
     HOME = "${env.WORKSPACE}"
     MY_SECRET_KEY = credentials('Katalon_API_key')
     dockerimagename = "vaibhavx7/android-emulator"
+    EMAIL_RECIPIENT = 'osiris007x@gmail.com'
+    FILE_TO_ATTACH = '/home/siddhatech/Reports/*.html'
     dockerImage = ""
   }
   
@@ -120,13 +122,28 @@ pipeline {
   }
 
   post {
-        always {
-            mail to: 'osiris007x@gmail.com',
-                 subject: "Build ${currentBuild.fullDisplayName} completed",
-                 body: "The build ${currentBuild.fullDisplayName} has completed.\n\n" +
-                       "Result: ${currentBuild.currentResult}\n" +
-                       "Check the build details at: ${env.BUILD_URL}"
-        }
+        // always {
+        //     mail to: 'osiris007x@gmail.com',
+        //          subject: "Build ${currentBuild.fullDisplayName} completed",
+        //          body: "The build ${currentBuild.fullDisplayName} has completed.\n\n" +
+        //                "Result: ${currentBuild.currentResult}\n" +
+        //                "Check the build details at: ${env.BUILD_URL}"
+        // }
+	always {
+            emailext (
+                to: "${EMAIL_RECIPIENT}",
+                subject: "Build #${currentBuild.number} - ${currentBuild.result}",
+                body: """
+                    Hello Team, 
+                    
+                    The build #${currentBuild.number} has finished with status: ${currentBuild.result}.
+                    
+                    Please find the attached report.
+                """,
+                attachmentsPattern: "${FILE_TO_ATTACH}",  // Attach the file from the specified location
+                mimeType: 'text/html'
+            )
+        }  
     }
 	
 }
