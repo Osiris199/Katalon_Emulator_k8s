@@ -5,7 +5,7 @@ pipeline {
     MY_SECRET_KEY = credentials('Katalon_API_key')
     dockerimagename = "vaibhavx7/android-emulator"
     EMAIL_RECIPIENT = 'osiris007x@gmail.com'
-    FILE_TO_ATTACH = '/home/siddhatech/Reports/*.html'
+    FILE_TO_ATTACH = '/home/siddhatech/Reports/'
     WORKSPACE_REPORT_DIR = "${WORKSPACE}/Reports"  
     dockerImage = ""
   }
@@ -99,9 +99,8 @@ pipeline {
 	  
     stage('Copy Reports to workspace') {
             steps {
-		sh 'ls -l /home/siddhatech/Reports/'
                 sh 'mkdir -p ${WORKSPACE_REPORT_DIR}'
-                sh 'cp /home/siddhatech/Reports/*.html ${WORKSPACE_REPORT_DIR}/'
+                sh 'find ${FILE_TO_ATTACH} -name "*.html" -exec cp {} ${WORKSPACE_REPORT_DIR}/ \\;'
             }
     }
   }
