@@ -31,30 +31,6 @@ pipeline {
       }
     }
 	  
-  //   stage('Check Docker Image') {
-  //   steps {
-  //       script {
-		// def imageCheckRaw 
-		// try{
-		//    imageCheckRaw = sh(script: 'docker search --format "{{.Name}}" vaibhavx7/android-emulator | grep "^vaibhavx7/android-emulator$"', returnStdout: true)
-		//    echo "imageCheckRaw ${imageCheckRaw}"
-		// } catch (Exception e) {
-  //                  echo "Error occurred: ${e.message}"
-  //                  env.imageCheck = ""
-  //           	}
-		
-	 //        if (imageCheckRaw instanceof String && imageCheckRaw != "") {
-	 //          def imageCheck = imageCheckRaw.trim() 
-  //                 echo "imageCheck result: ${imageCheck}"
-	 //          env.imageCheck = imageCheck
-	 //       } else {
-  //                 echo "No image found for vaibhavx7/android-emulator."
-  //                 env.imageCheck = ""
-  //              }
-  //       }
-  //    }
-  //  }
-
     stage('Build image') {
        when {
 	        expression {
@@ -89,54 +65,48 @@ pipeline {
         }
     }
 
-    stage('Deploying katalon and android emulator container to Kubernetes') {
-      steps {
-        script {
-		sh "whoami"
-	        withCredentials([file(credentialsId: 'Kubeconfig_file', variable: 'KUBECONFIG')]) {
-    	        sh '''minikube kubectl -- apply -f deployment.yaml'''
-		sh '''minikube kubectl -- apply -f android-service.yaml'''
-                sh '''minikube kubectl -- apply -f vnc-service.yaml'''
-		sh '''minikube kubectl -- apply -f hpa.yaml'''
-          }
-        }
-      }
-    }
+ //    stage('Deploying katalon and android emulator container to Kubernetes') {
+ //      steps {
+ //        script {
+	// 	sh "whoami"
+	//         withCredentials([file(credentialsId: 'Kubeconfig_file', variable: 'KUBECONFIG')]) {
+ //    	        sh '''minikube kubectl -- apply -f deployment.yaml'''
+	// 	sh '''minikube kubectl -- apply -f android-service.yaml'''
+ //                sh '''minikube kubectl -- apply -f vnc-service.yaml'''
+	// 	sh '''minikube kubectl -- apply -f hpa.yaml'''
+ //          }
+ //        }
+ //      }
+ //    }
 	
-     stage('VNC Port Forwarding') {
-	steps {
-	  script {
-		  sh "chmod +x -R ${env.WORKSPACE}"
-              	  sh "sudo -u siddhatech ./portforward_vnc.sh"
-	  }
-        }
-     }
+ //     stage('VNC Port Forwarding') {
+	// steps {
+	//   script {
+	// 	  sh "chmod +x -R ${env.WORKSPACE}"
+ //              	  sh "sudo -u siddhatech ./portforward_vnc.sh"
+	//   }
+ //        }
+ //     }
 
-    stage('Check case status and Terminate pod') {
-	steps {
-	   script {
-		   sh "chmod +x -R ${env.WORKSPACE}"
-          	   sh "sudo -u siddhatech ./delete_pod.sh"
-	}
-      }
-    }
+ //    stage('Check case status and Terminate pod') {
+	// steps {
+	//    script {
+	// 	   sh "chmod +x -R ${env.WORKSPACE}"
+ //          	   sh "sudo -u siddhatech ./delete_pod.sh"
+	// }
+ //      }
+ //    }
 	  
     stage('Copy Reports to workspace') {
             steps {
+		sh 'ls -l /home/siddhatech/Reports/*.html'
                 sh 'mkdir -p ${WORKSPACE_REPORT_DIR}'
                 sh 'cp /home/siddhatech/Reports/*.html ${WORKSPACE_REPORT_DIR}/'
             }
-        }
+    }
   }
 
   post {
-        // always {
-        //     mail to: 'osiris007x@gmail.com',
-        //          subject: "Build ${currentBuild.fullDisplayName} completed",
-        //          body: "The build ${currentBuild.fullDisplayName} has completed.\n\n" +
-        //                "Result: ${currentBuild.currentResult}\n" +
-        //                "Check the build details at: ${env.BUILD_URL}"
-        // }
 	always {
             emailext (
                 to: "${EMAIL_RECIPIENT}",
