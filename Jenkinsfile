@@ -121,11 +121,11 @@ pipeline {
 
   post {
         always {
-            emailext(
-                to: 'vaibhavp@siddhatech.com',
-                subject: "Build #${env.BUILD_NUMBER} Complete",
-                body: "The build #${env.BUILD_NUMBER} has completed."
-            )
+            mail to: 'osiris007x@gmail.com',
+                 subject: "Build ${currentBuild.fullDisplayName} completed",
+                 body: "The build ${currentBuild.fullDisplayName} has completed.\n\n" +
+                       "Result: ${currentBuild.currentResult}\n" +
+                       "Check the build details at: ${env.BUILD_URL}"
         }
     }
 	
