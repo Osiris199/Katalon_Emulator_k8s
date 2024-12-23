@@ -99,7 +99,7 @@ pipeline {
 	  
     stage('Copy Reports to workspace') {
             steps {
-		sh 'ls -l /home/siddhatech/Reports/*.html'
+		sh 'ls -l /home/siddhatech/Reports/'
                 sh 'mkdir -p ${WORKSPACE_REPORT_DIR}'
                 sh 'cp /home/siddhatech/Reports/*.html ${WORKSPACE_REPORT_DIR}/'
             }
