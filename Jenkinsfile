@@ -5,7 +5,7 @@ pipeline {
     MY_SECRET_KEY = credentials('Katalon_API_key')
     dockerimagename = "vaibhavx7/android-emulator"
     EMAIL_RECIPIENT = 'osiris007x@gmail.com'
-    FILE_TO_ATTACH = '/home/siddhatech/Reports/*.html'
+    FILE_TO_ATTACH = 'Reports/*.html'
     dockerImage = ""
   }
   
