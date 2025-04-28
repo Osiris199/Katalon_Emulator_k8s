@@ -10,4 +10,4 @@ Here's a breakdown of our current process:
 2) Upon completion, it transfers the test reports to the local machine.
 3) Finally, the pod is terminated.
 
-Currently, our test cases are set up statically, but we're actively working on updating this process.
+Currently, our test cases are set up statically, but we're actively working on updating this process
