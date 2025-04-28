@@ -106,21 +106,64 @@ pipeline {
   }
 
   post {
-	always {
-            emailext (
-                to: "${EMAIL_RECIPIENT}",
-                subject: "Build #${currentBuild.number} - ${currentBuild.result}",
-                body: """
-                    Hello Team, 
-                    
-                    The build #${currentBuild.number} has finished with status: ${currentBuild.result}.
-                    
-                    Please find the attached report.
-                """,
-                attachmentsPattern: "Reports/*.html",
-                mimeType: 'text/html'
-            )
-        }  
+    always {
+        emailext (
+            to: "${EMAIL_RECIPIENT}",
+            subject: "Build Notification: #${currentBuild.number} - ${currentBuild.result}",
+            body: """
+                <html>
+                    <body style="font-family: Arial, sans-serif; color: #333; padding: 20px;">
+                        <!-- Logo Section -->
+                        <div style="text-align: center; margin-bottom: 30px;">
+                            <img src="https://www.siddhatech.com/wp-content/uploads/Logo.png" style="width: 150px;">
+                        </div>
+                        
+                        <h2 style="color: #2E86C1;">🚀 Build Notification</h2>
+                        
+                        <!-- Table Section -->
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                            <tr style="background-color: #f2f2f2;">
+                                <th style="padding: 8px; text-align: left; border: 1px solid #ddd; font-size: 16px;">Project</th>
+                                <td style="padding: 8px; border: 1px solid #ddd; font-size: 16px;">K8s Katalon Emulator</td>
+                            </tr>
+                            <tr>
+                                <th style="padding: 8px; text-align: left; border: 1px solid #ddd; font-size: 16px;">Build Number</th>
+                                <td style="padding: 8px; border: 1px solid #ddd; font-size: 16px;">#${currentBuild.number}</td>
+                            </tr>
+                            <tr>
+                                <th style="padding: 8px; text-align: left; border: 1px solid #ddd; font-size: 16px;">Status</th>
+                                <td style="padding: 8px; border: 1px solid #ddd; font-size: 16px; color: ${currentBuild.result == 'SUCCESS' ? 'green' : 'red'};">${currentBuild.result}</td>
+                            </tr>
+                            <tr>
+                                <th style="padding: 8px; text-align: left; border: 1px solid #ddd; font-size: 16px;">Triggered By</th>
+                                <td style="padding: 8px; border: 1px solid #ddd; font-size: 16px;">${env.BUILD_USER ?: 'Automated Trigger'}</td>
+                            </tr>
+                            <tr>
+                                <th style="padding: 8px; text-align: left; border: 1px solid #ddd; font-size: 16px;">Start Time</th>
+                                <td style="padding: 8px; border: 1px solid #ddd; font-size: 16px;">${currentBuild.startTimeInMillis ? new Date(currentBuild.startTimeInMillis).format("yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone('UTC')) : 'N/A'}</td>
+                            </tr>
+                            <tr>
+                                <th style="padding: 8px; text-align: left; border: 1px solid #ddd; font-size: 16px;">Duration</th>
+                                <td style="padding: 8px; border: 1px solid #ddd; font-size: 16px;">${currentBuild.durationString}</td>
+                            </tr>
+                        </table>
+                        
+                        <p>You can find the detailed test report attached to this email.</p>
+                        <p>For more details, visit: <a href="${env.BUILD_URL}" style="color:#2E86C1;">Build Console Output</a></p>
+                        
+                        <!-- Footer Section -->
+                        <br/>
+                        <div style="text-align: center; font-size: small; color: #888;">
+                            <p>💡 This is an automated message from Jenkins CI/CD.</p>
+                            <p>For inquiries, please contact the team at <a href="mailto:vaibhavp@siddhatech.com" style="color:#2E86C1;">vaibhavp@siddhatech.com</a></p>
+                        </div>
+                    </body>
+                </html>
+            """,
+            attachmentsPattern: "Reports/*.html",
+            mimeType: 'text/html'
+        )
     }
+}
 	
 }
