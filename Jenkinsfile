@@ -25,7 +25,7 @@ pipeline {
     stage('SCM Checkout') {
       steps{
         script {
-	  git branch: 'master', credentialsId: 'Github_cred', url: 'https://github.com/Osiris199/Katalon_Emulator_k8s.git'
+	  git branch: 'master', credentialsId: 'Osiris199_github', url: 'https://github.com/Osiris199/Katalon_Emulator_k8s.git'
 	  checkout scm
         }
       }
