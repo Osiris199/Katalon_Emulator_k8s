@@ -4,9 +4,9 @@ pipeline {
     HOME = "${env.WORKSPACE}"
     MY_SECRET_KEY = credentials('Katalon_API_key')
     dockerimagename = "vaibhavx7/android-emulator"
-    EMAIL_RECIPIENT = 'vaibhavp@siddhatech.com'
+    EMAIL_RECIPIENT = "vaibhavp@siddhatech.com, arsheenk@siddhatech.com, sudarshanmali@siddhatech.com"
     FILE_TO_ATTACH = '/home/siddhatech/Reports/'
-    WORKSPACE_REPORT_DIR = "${WORKSPACE}/Reports"  
+    WORKSPACE_REPORT_DIR = "${WORKSPACE}/Reports"
     dockerImage = ""
   }
   
